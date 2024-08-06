@@ -15,7 +15,7 @@ public class AnnoLoggerService {
 	
 	Logger LOGGER = LogManager.getLogger(AnnoLoggerService.class);
 	
-	@Pointcut("execution(* com.gn.spring..*(..))")
+	@Pointcut("execution(* com.jy.todolist..*(..))")
 	private void boardLogger() {}
 	
 	// 특정 메소드 실행 전에 동작할 코드

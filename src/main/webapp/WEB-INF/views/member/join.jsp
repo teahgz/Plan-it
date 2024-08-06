@@ -70,7 +70,7 @@
                 })
                 .then(response => response.json())
                 .then(data => {
-                    alert(data.res_msg);
+                	console.log(data);
                     if (data.res_code == '200') {
                         location.href = "<%=request.getContextPath()%>/loginPage";
                     }

@@ -8,7 +8,7 @@
 <body>
     <nav>
         <ul>
-            <li class="btn"><a href="<c:url value='/login'/>">로그인</a></li>
+            <li class="btn"><a href="<c:url value='/loginPage'/>">로그인</a></li>
             <li class="btn"><a href="<c:url value='/join'/>">회원가입</a></li>
             <li class="btn">
                 <form method="post" action="<c:url value='/logout'/>">
