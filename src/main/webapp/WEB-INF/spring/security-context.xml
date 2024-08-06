@@ -20,7 +20,9 @@
 		username-parameter="user_id" 
 		password-parameter="user_pw"
 		default-target-url="/"
-		authentication-failure-url="/loginError"/>
+		authentication-failure-handler-ref="loginFailHandler"
+		/>
+		<!-- authentication-failure-url="/loginError" -->
 	 
 	 <logout 
 	 	logout-url="/logout"

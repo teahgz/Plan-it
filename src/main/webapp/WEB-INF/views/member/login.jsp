@@ -26,7 +26,11 @@
                     <div class="button-group">
                         <input type="button" value="로그인" onclick="loginForm();">
                     </div>
+                    
                 </form>
+				    <c:if test="${not empty errorMessage}">
+				        <p style="color: red;">Error : ${errorMessage}</p>
+				    </c:if>
             </div>
             <div class="find_id_password">
                 <a href="#">아이디 찾기</a>
