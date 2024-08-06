@@ -1,0 +1,90 @@
+@charset "UTF-8";
+section { 
+	margin: 100px 0;
+}
+
+#section_wrap {
+	width: 1200px;
+	margin: 0 auto;
+}
+
+#section_wrap .word {
+	width: 1024px;
+	margin: 0 auto;
+	text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333; 
+}
+
+#section_wrap .login_form {
+	width: 1024px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+#section_wrap .login_form form {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#section_wrap .login_form .form-group {
+	display: flex;
+	flex-direction: column; 
+	margin-right: 20px; 
+}
+
+#section_wrap .login_form input[type='text'],
+#section_wrap .login_form input[type='password'] {
+	margin-bottom: 15px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #333; 
+    border-radius: 4px; 
+    background-color: #ffffff; 
+    color: #333; 
+}
+
+#section_wrap .login_form .button-group {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start; 
+}
+
+#section_wrap .login_form input[type='button'] {
+	width: 90px;
+	height:50px;
+    font-size: 16px;
+    border: 1px solid #333; 
+    border-radius: 4px; 
+    background-color: #000000; 
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
+}
+
+#section_wrap .login_form input[type='button']:hover{
+	 background-color: #333333; 
+}
+
+#section_wrap .find_id_password {
+	width: 1024px;
+	margin: 20px auto;
+	text-align: center;
+}
+
+#section_wrap .find_id_password a {
+	display: inline-block;
+	width: 200px;
+	padding: 10px 0;
+	border-top: 1px solid #e1e1e1;
+	border-bottom: 1px solid #e1e1e1;
+	color: #000000; 
+	text-decoration: none; 
+}
+
+#section_wrap .find_id_password a:hover {
+	color: #333333; 
+	text-decoration: underline;
+}

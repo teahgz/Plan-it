@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    https://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/security 
+    http://www.springframework.org/schema/security/spring-security.xsd
+    http://www.springframework.org/schema/context 
+    https://www.springframework.org/schema/context/spring-context.xsd">
+
+	<http auto-config="true" use-expressions="true">
+		<intercept-url pattern="/" access="permitAll()"/>
+		<intercept-url pattern="/resources/**" access="permitAll()"/>
+		<intercept-url pattern="/board/**" access="isAuthenticated()"/>
+		<intercept-url pattern="/join" access="permitAll()"/>
+	
+	<form-login 
+		login-page="/loginPage"
+		username-parameter="user_id" 
+		password-parameter="user_pw"
+		default-target-url="/"
+		authentication-failure-url="/loginError"/>
+	 
+	 <logout 
+	 	logout-url="/logout"
+	 	logout-success-url="/"
+	 	delete-cookies="JESSIONID, remember-me"/>
+	 	<!-- 
+	 		token-validity-seconds : 며칠동안 유지(쿠키 지속 시간) 604800 (7일) 86400 (1일)
+	 	 -->
+	 	<remember-me token-validity-seconds="86400" data-source-ref="dataSource"/>
+	</http>
+	
+	<!--
+		암호화 로직
+		Spring Security에서 비밀번호 암호화 로직 담당 Bean 등록
+	 -->
+	<beans:bean id="bcryptPassword" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+	
+
+	 <context:annotation-config/>
+	 <context:component-scan base-package="com.jy.todolist"/>
+	 
+	  <authentication-manager>
+	  	<authentication-provider user-service-ref="loginService">
+	  		<password-encoder ref="bcryptPassword"/>
+	  	</authentication-provider>
+	  </authentication-manager>
+	
+	 
+	<!-- 방화벽  --> 
+	<beans:bean id="customHttpFirewall" 
+	class="org.springframework.security.web.firewall.StrictHttpFirewall">
+		<beans:property name="allowSemicolon" value="true"/>
+	</beans:bean>
+	<http-firewall ref="customHttpFirewall"/> 
+	
+</beans:beans>

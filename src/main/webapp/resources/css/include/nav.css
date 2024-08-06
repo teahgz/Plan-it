@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+nav {
+    padding-right: 50px;
+}
+
+nav ul {
+    list-style: none; 
+    margin: 0;
+    padding: 0;
+    text-align: right; 
+}
+
+nav ul li {
+    display: inline; 
+    margin-left: 15px; 
+}
+
+.btn a {
+    color: #333; 
+    text-decoration: none; 
+    font-size: 18px;
+    transition: color 0.3s ease; 
+}
+
+.btn form input {
+	background: none; 
+    border: none; 
+   	color: #333; 
+    text-decoration: none; 
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+nav ul li form {
+    display: inline; 
+}
+
+.btn a:hover, .btn form input:hover {
+    color: #ff8080; 
+}
+
