@@ -8,4 +8,12 @@
 	INSERT INTO `users`(user_id,user_pw,user_name)
 	VALUES (#{user_id},#{user_pw},#{user_name})
 	</insert>
+	<!-- 멤버 조횐  -->
+	<select id="selectMemberById" resultType="com.jy.todolist.member.model.vo.Member" parameterType="string">
+	SELECT *
+	FROM `users`
+	<where>
+		user_id = #{user_id}
+	</where>
+	</select>
 </mapper>

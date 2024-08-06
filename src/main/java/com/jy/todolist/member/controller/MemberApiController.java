@@ -25,7 +25,6 @@ public class MemberApiController {
 		resultMap.put("res_code", "404");
 		resultMap.put("res_msg", "회원가입 중 오류가 발생하였습니다.");
 		
-		System.out.println(resultMap);
 		if(memberService.createMember(vo) > 0) {
 			resultMap.put("res_code", "200");
 			resultMap.put("res_msg", "회원가입이 성공적으로 완료되었습니다.");

@@ -13,7 +13,6 @@
 	<http auto-config="true" use-expressions="true">
 		<intercept-url pattern="/" access="permitAll()"/>
 		<intercept-url pattern="/resources/**" access="permitAll()"/>
-		<intercept-url pattern="/board/**" access="isAuthenticated()"/>
 		<intercept-url pattern="/join" access="permitAll()"/>
 	
 	<form-login 
@@ -26,11 +25,10 @@
 	 <logout 
 	 	logout-url="/logout"
 	 	logout-success-url="/"
-	 	delete-cookies="JESSIONID, remember-me"/>
+	 	delete-cookies="JESSIONID"/>
 	 	<!-- 
 	 		token-validity-seconds : 며칠동안 유지(쿠키 지속 시간) 604800 (7일) 86400 (1일)
 	 	 -->
-	 	<remember-me token-validity-seconds="86400" data-source-ref="dataSource"/>
 	</http>
 	
 	<!--
