@@ -1,4 +1,5 @@
-package com.jy.todolist.member.model.vo;
+package com.jy.todolist.task.model.vo;
+
 
 import java.sql.Timestamp;
 
@@ -13,11 +14,13 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Member {
+public class Task {
+
+	private int task_no;
 	private int user_no;
-	private String user_id;
-	private String user_pw;
-	private String user_name;
-	private Timestamp create_date;
+	private int category_no;
+	private String task_title;
 	private int status;
+	private Timestamp start_date;
+	private Timestamp end_date;
 }

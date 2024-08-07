@@ -29,8 +29,7 @@ public class LoginFailHandler implements AuthenticationFailureHandler {
             errorMessage = "내부 시스템 문제로 로그인 요청을 처리할 수 없습니다.";
         } else if (exception instanceof DisabledException || exception instanceof LockedException) {
             errorMessage = "탈퇴한 회원입니다.";
-        }
-        
+        }        
         request.setAttribute("errorMessage", errorMessage);
         request.getRequestDispatcher("/WEB-INF/views/member/login.jsp").forward(request, response);
     }
