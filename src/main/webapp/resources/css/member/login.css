@@ -1,6 +1,6 @@
 @charset "UTF-8";
 section { 
-	margin: 100px 0;
+	margin: 10px 0;
 }
 
 #section_wrap {
@@ -13,7 +13,7 @@ section {
 	margin: 0 auto;
 	text-align: center;
     margin-bottom: 20px;
-    font-size: 24px;
+    font-size: 22px;
     color: #333; 
 }
 

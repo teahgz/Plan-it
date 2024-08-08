@@ -13,7 +13,12 @@ public class TaskDao {
 
 		@Autowired
 		SqlSession sqlSession;
-		public List<Task> selectTaskList(){
-			return sqlSession.selectList("taskMapper.selectTaskList");	
+		
+		public List<Task> selectTaskList(int userNo){
+			return sqlSession.selectList("taskMapper.selectTaskList",userNo);	
+		}
+		
+		public int selectTaskCount(int userNo) {
+			return sqlSession.selectOne("taskMapper.selectTaskCount",userNo);
 		}
 }

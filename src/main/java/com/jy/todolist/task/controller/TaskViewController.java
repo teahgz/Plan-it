@@ -13,15 +13,14 @@ import com.jy.todolist.task.model.vo.Task;
 
 @Controller
 public class TaskViewController {
-	
-	@Autowired
-	TaskService taskService;
-	
-	@GetMapping("/task")
-	public String selectTaskList(Model model) {
-		List<Task> resultList = taskService.selectTaskList();
-		model.addAttribute("resultList", resultList);
-		System.out.println(resultList);
-		return "/task/list";
-	}
+    
+    @Autowired
+    TaskService taskService;
+    
+    @GetMapping("/task/{user_no}")
+    public String selectTaskList(@PathVariable("user_no") int userNo, Model model) {
+        List<Task> resultList = taskService.selectTaskList(userNo);
+        model.addAttribute("resultList", resultList);
+        return "task/list";
+    }
 }

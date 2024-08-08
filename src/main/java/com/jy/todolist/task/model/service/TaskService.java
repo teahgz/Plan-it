@@ -15,16 +15,25 @@ public class TaskService {
 	@Autowired
 	TaskDao taskDao;
 	
-	public List<Task> selectTaskList(){
+	public List<Task> selectTaskList(int userNo){
 		List<Task> resultList = new ArrayList<Task>();
 		
 		try {
-			resultList = taskDao.selectTaskList();
+			resultList = taskDao.selectTaskList(userNo);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return resultList;
-		
 	}
-	
+
+	public int selectTaskCount(int userNo) {
+		int result = 0;
+		
+		try {
+			result = taskDao.selectTaskCount(userNo);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 }

@@ -5,9 +5,19 @@
 <mapper namespace="taskMapper">
 
 	<!-- 할 일 조횐  -->
-	<select id="selectTaskList" resultType="com.jy.todolist.task.model.vo.Task" parameterType="string">
+	<select id="selectTaskList" resultType="com.jy.todolist.task.model.vo.Task" parameterType="_int">
 	SELECT *
 	FROM `tasks`
-
+	<where>
+		user_no = #{user_no}
+	</where>
+	</select>
+	
+	<select id="selectTaskCount" resultType="int" parameterType="_int">
+	SELECT COUNT(*)
+	FROM `tasks`
+	<where>
+		user_no = #{user_no}
+	</where>
 	</select>
 </mapper>

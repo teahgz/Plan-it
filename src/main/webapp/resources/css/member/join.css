@@ -2,14 +2,13 @@
 
 .signup-section {
 	display: flex;
-    padding: 50px 20px;
+    padding: 0px 20px;
     background-color: #ffffff; 
     justify-content: center;
     align-items: center;
 }
 
 .container {
-    padding: 20px;
     max-width: 400px; 
     width: 100%; 
 }

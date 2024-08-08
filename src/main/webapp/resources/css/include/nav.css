@@ -1,7 +1,8 @@
 @charset "UTF-8";
 
 nav {
-    padding-right: 50px;
+    padding-right: 100px;
+    padding-bottom:50px;
 }
 
 nav ul {
