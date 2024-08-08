@@ -17,7 +17,27 @@
 	SELECT COUNT(*)
 	FROM `tasks`
 	<where>
-		user_no = #{user_no}
+		<if test="user_no != null">
+			user_no = #{user_no}
+		</if>
+		<if test="status != null">
+			AND status = 2
+		</if>
 	</where>
 	</select>
+	
+	<select id="selectTaskEndCount" resultType="int" parameterType="_int">
+	SELECT COUNT(*)
+	FROM `tasks`
+	<where>
+		<if test="user_no != null">
+			user_no = #{user_no}
+		</if>
+		<if test="status != null">
+			AND status = 3
+		</if>
+	</where>
+	</select>
+	
+	
 </mapper>

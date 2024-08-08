@@ -57,15 +57,39 @@ li {
 }
 
 .categories ul li {
-    background: #ecf0f1;
-    padding: 10px;
-    border-radius: 3px;
-    margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ecf0f1;
+  padding: 10px;
+  border-radius: 3px;
+  margin-bottom: 5px;
 }
 
-.categories ul li:hover {
-    background: #e0e6e8;
+.categories ul li .addInput {
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 5px 10px;
+  font-size: 14px;
+  width: 200px;
+  margin-right: 10px;
 }
+
+.categories ul li .addBtn {
+  background-color: #3498db;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 3px;
+  text-decoration: none;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+}
+
+.categories ul li .addBtn:hover {
+  background-color: #2980b9;
+}
+
 
 @media (max-width: 768px) {
     .section {
