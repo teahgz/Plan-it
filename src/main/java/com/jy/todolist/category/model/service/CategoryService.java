@@ -26,10 +26,31 @@ public class CategoryService {
 		return resultList;
 	}
 	
-	public int addCategory(Category ct) {
+	public int addCategory(Category co) {
 		int result = 0;
 		try {
-			result = categoryDao.addCategory(ct);
+			result = categoryDao.addCategory(co);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public int updateCategory(Category co) {
+		int result = 0;
+		try {
+			result = categoryDao.updateCategory(co);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public int deleteCategory(int category_no) {
+		int result = 0;
+		
+		try {
+			result = categoryDao.deleteCategory(category_no);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

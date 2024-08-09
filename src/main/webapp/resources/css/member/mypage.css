@@ -49,6 +49,13 @@ ul {
 
 li {
     margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
 .count {
@@ -56,40 +63,75 @@ li {
     color: #3498db;
 }
 
-.categories ul li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #ecf0f1;
-  padding: 10px;
-  border-radius: 3px;
-  margin-bottom: 5px;
+.categories ul li .category-name {
+    flex-grow: 1;
 }
 
-.categories ul li .addInput {
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  padding: 5px 10px;
-  font-size: 14px;
-  width: 200px;
-  margin-right: 10px;
+.categories ul li .addInput,
+.categories ul li .updateForm input[type="text"] {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+    width: 200px;
+    margin-right: 10px;
+    transition: border-color 0.3s ease;
 }
 
-.categories ul li .addBtn {
-  background-color: #3498db;
-  color: #fff;
-  padding: 5px 10px;
-  border-radius: 3px;
-  text-decoration: none;
-  font-size: 14px;
-  border: none;
-  cursor: pointer;
+.categories ul li .addInput:focus,
+.categories ul li .updateForm input[type="text"]:focus {
+    outline: none;
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
 }
 
-.categories ul li .addBtn:hover {
-  background-color: #2980b9;
+.categories ul li .addBtn,
+.categories ul li .updateBtn,
+.categories ul li .updateForm input[type="submit"] {
+    background-color: #000000;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
+.categories ul li .addBtn:hover,
+.categories ul li .updateBtn:hover,
+.categories ul li .updateForm input[type="submit"]:hover {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.categories ul li .deleteBtn {
+    background-color: #808080;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 10px; 
+}
+
+.categories ul li .deleteBtn:hover {
+    background-color: #c0c0c0;
+}
+
+.updateForm {
+    display: none;
+    flex-grow: 1;
+    margin-left: 10px;
+}
+
+.updateForm input[type="text"] {
+    width: auto;
+}
 
 @media (max-width: 768px) {
     .section {

@@ -18,8 +18,15 @@ public class CategoryDao {
 		return sqlSession.selectList("categoryMapper.selectCategoryList",user_no);
 	}
 	
-	public int addCategory(Category ct) {
-		return sqlSession.insert("categoryMapper.addCategory",ct);
+	public int addCategory(Category co) {
+		return sqlSession.insert("categoryMapper.addCategory",co);
 	}
 	
+	public int updateCategory(Category co) {
+		return sqlSession.update("categoryMapper.updateCategory",co);
+	}
+	
+	public int deleteCategory(int category_no) {
+		return sqlSession.delete("categoryMapper.deleteCategory",category_no);
+	}
 }
