@@ -23,4 +23,5 @@ public class Task {
 	private int status;
 	private Timestamp start_date;
 	private Timestamp end_date;
+	private String category_name;
 }

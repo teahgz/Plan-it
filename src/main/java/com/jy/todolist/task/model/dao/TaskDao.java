@@ -26,5 +26,9 @@ public class TaskDao {
 			return sqlSession.selectOne("taskMapper.selectTaskEndCount",user_no);
 		}
 		
+		public int taskAdd(Task vo) {
+			return sqlSession.insert("taskMapper.taskAdd",vo);
+		}
+		
 
 }

@@ -4,14 +4,15 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="taskMapper">
 
-	<!-- 할 일 조횐  -->
-	<select id="selectTaskList" resultType="com.jy.todolist.task.model.vo.Task" parameterType="_int">
-	SELECT *
-	FROM `tasks`
-	<where>
-		user_no = #{user_no}
-	</where>
-	</select>
+<!-- 할 일 조회 -->
+<select id="selectTaskList" resultType="com.jy.todolist.task.model.vo.Task" parameterType="_int">
+  SELECT t.*, c.category_name
+  FROM `tasks` t
+  LEFT JOIN `categories` c ON t.category_no = c.category_no
+  <where>
+    t.user_no = #{user_no}
+  </where>
+</select>
 	
 	<select id="selectTaskCount" resultType="int" parameterType="_int">
 	SELECT COUNT(*)
@@ -39,5 +40,9 @@
 	</where>
 	</select>
 	
+	<insert id="taskAdd" parameterType="com.jy.todolist.task.model.vo.Task">
+	INSERT INTO `tasks` (user_no, category_no, task_title, start_date, end_date) VALUES
+	(#{user_no},#{category_no},#{task_title},#{start_date},#{end_date})
+	</insert>
 	
 </mapper>

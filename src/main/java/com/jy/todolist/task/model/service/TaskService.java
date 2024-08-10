@@ -47,4 +47,14 @@ public class TaskService {
 		return result;
 	}
 	
+	public int taskAdd(Task vo) {
+		int result = 0;
+		try {
+			result = taskDao.taskAdd(vo);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 }

@@ -31,19 +31,19 @@
             let vali_check = false;
             let vali_text = "";
             if (form.user_id.value == "") {
-                vali_text += '아이디를 입력하세요.\n';
+                vali_text += '아이디를 입력하세요.';
                 form.user_id.focus();
             } else if (form.user_pw.value == "") {
-                vali_text += '비밀번호를 입력하세요.\n';
+                vali_text += '비밀번호를 입력하세요.';
                 form.user_pw.focus();
             } else if (form.user_pw_check.value == "") {
-                vali_text += '비밀번호 확인을 입력하세요.\n';
+                vali_text += '비밀번호 확인을 입력하세요.';
                 form.user_pw_check.focus();
             } else if (form.user_name.value == "") {
-                vali_text += '이름을 입력하세요.\n';
+                vali_text += '이름을 입력하세요.';
                 form.user_name.focus();
             } else if (form.user_pw.value != form.user_pw_check.value) {
-                vali_text += '비밀번호와 비밀번호 확인이 일치하지 않습니다.\n';
+                vali_text += '비밀번호와 비밀번호 확인이 일치하지 않습니다.';
                 form.user_pw.focus();
             } else {
                 vali_check = true;

@@ -1,4 +1,3 @@
-<!-- mypage.jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
@@ -37,7 +36,8 @@
 						<li name="cate_name"><span class="category-name">
 							<c:out value="${cate.category_name}" /></span>
 							<button type="button" class="updateBtn" onclick="updateFrm(this)">수정</button>
-							<button type="submit" class="deleteBtn" onclick="cateDelete();">삭제</button>
+							
+							<button type="submit" class="deleteBtn" value="${cate.category_no }" onclick="cateDelete(this);">삭제</button>
 							<form id="updateForm" style="display: none;">
 								<input type="hidden" name="category_no" value="${cate.category_no }"/>
 								<input type="text" class="addInput" name="category_name" value="${cate.category_name}" placeholder="수정할 카테고리 이름을 입력하세요" />
@@ -59,7 +59,7 @@
         </div>
     </div>
 
-    <script>
+	<script>
     const cateAddFrm = document.getElementById("cateAddFrm");
     
     cateAddFrm.addEventListener('submit',(e)=>{
@@ -164,29 +164,27 @@ function updateFrm(button) {
             }
         });
     });
-
-    const cateDelete = function() {
-    	
+    
+    function cateDelete(button) {
+        const categoryNo = button.value;
+        
         if (confirm("정말 삭제하시겠습니까?")) {
-
-            fetch(`/category/${cate.category_no }`, { 
-                method: 'DELETE', 
+            fetch('<%=request.getContextPath()%>/category/' + categoryNo, {
+                method: 'DELETE',
                 headers: {
-                    'Content-Type': 'application/json', 
+                    'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': '${_csrf.token}'
                 }
             })
             .then(response => response.json())
             .then(data => {
-                alert(data.res_msg); // 서버로부터 받은 응답 메시지 표시
+                alert(data.res_msg);
                 if (data.res_code === '200') {
-                  alert("성공")
+                	location.href = `<%=request.getContextPath()%>/myPage/<sec:authentication property='principal.member.user_no'/>`;
                 }
             })
-         
-            
         }
-    };
+    }
 
     
     </script>

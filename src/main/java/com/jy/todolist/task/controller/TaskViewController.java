@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.jy.todolist.category.model.service.CategoryService;
+import com.jy.todolist.category.model.vo.Category;
 import com.jy.todolist.task.model.service.TaskService;
 import com.jy.todolist.task.model.vo.Task;
 
@@ -17,10 +19,20 @@ public class TaskViewController {
     @Autowired
     TaskService taskService;
     
+	@Autowired
+	CategoryService categoryService;
+	
     @GetMapping("/task/{user_no}")
-    public String selectTaskList(@PathVariable("user_no") int userNo, Model model) {
-        List<Task> resultList = taskService.selectTaskList(userNo);
+    public String selectTaskList(@PathVariable("user_no") int user_no, Model model) {
+        List<Task> resultList = taskService.selectTaskList(user_no);
         model.addAttribute("resultList", resultList);
         return "task/list";
+    }
+    
+    @GetMapping("/taskAddPage/{user_no}")
+    public String taskAddPage(@PathVariable("user_no") int user_no, Model model) {
+    	List<Category> categoryList = categoryService.selectCategoryList(user_no);
+    	model.addAttribute("categoryList",categoryList);
+    	return "task/add";
     }
 }
