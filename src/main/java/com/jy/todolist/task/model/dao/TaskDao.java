@@ -30,5 +30,9 @@ public class TaskDao {
 			return sqlSession.insert("taskMapper.taskAdd",vo);
 		}
 		
+		public int deleteTask(int task_no) {
+			return sqlSession.delete("taskMapper.deleteTask",task_no);
+		}
+		
 
 }

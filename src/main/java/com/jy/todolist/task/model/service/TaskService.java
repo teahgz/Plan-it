@@ -57,4 +57,14 @@ public class TaskService {
 		return result;
 	}
 	
+	public int deleteTask(int task_no) {
+		int result = 0;
+		try {
+			result = taskDao.deleteTask(task_no);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 }

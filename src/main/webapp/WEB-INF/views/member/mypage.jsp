@@ -157,7 +157,7 @@ function updateFrm(button) {
                 .then(response => response.json())
                 .then(data => {
                     alert(data.res_msg);
-                    if (data.res_code === '200') {
+                    if (data.res_code == '200') {
                         location.href = `<%=request.getContextPath()%>/myPage/<sec:authentication property='principal.member.user_no'/>`;
                     }
                 })
@@ -177,12 +177,12 @@ function updateFrm(button) {
                 }
             })
             .then(response => response.json())
-            .then(data => {
-                alert(data.res_msg);
-                if (data.res_code === '200') {
-                	location.href = `<%=request.getContextPath()%>/myPage/<sec:authentication property='principal.member.user_no'/>`;
-                }
-            })
+             .then(data => {
+                    alert(data.res_msg);
+                    if (data.res_code == '200') {
+                    	  location.href = `<%=request.getContextPath()%>/myPage/<sec:authentication property='principal.member.user_no'/>`;
+                    }
+                })
         }
     }
 
