@@ -77,5 +77,25 @@ body {
 }
 
 #section_wrap .task_list .add_new:hover {
-    background-color: #333; 
+    background-color: rgb(192, 192, 192); 
+}
+
+#section_wrap .task_list table tbody tr td a,
+#section_wrap .task_list table tbody tr td button {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 0 5px;
+    background-color: #000;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+}
+
+#section_wrap .task_list table tbody tr td a:hover,
+#section_wrap .task_list table tbody tr td button:hover {
+    background-color: #c0c0c0;
 }

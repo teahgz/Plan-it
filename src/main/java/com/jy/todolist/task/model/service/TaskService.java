@@ -67,4 +67,24 @@ public class TaskService {
 		return result;
 	}
 	
+	public Task selectTaskDetail(int task_no) {
+		Task t = new Task();
+		try {
+			t = taskDao.selectTaskDetail(task_no);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return t;
+	}
+	
+	public int taskUpdate(Task vo) {
+		int result = 0;
+		try {
+			result = taskDao.taskUpdate(vo);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 }

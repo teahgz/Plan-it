@@ -46,11 +46,27 @@
 		VALUES
 		(#{user_no},#{category_no},#{task_title},#{start_date},#{end_date})
 	</insert>
-	
+	<!-- 할 일 삭제 -->
 	<delete id ="deleteTask" parameterType="_int">
 		DELETE FROM `tasks`
 		<where>
 			task_no = #{task_no}
 		</where>
 	</delete>
+	<!-- 할 일 상세 조회 -->
+	<select id="selectTaskDetail" resultType="com.jy.todolist.task.model.vo.Task" parameterType="_int">
+	 	SELECT *
+	 	FROM `tasks`
+	 	<where>
+	 		task_no = #{task_no}
+	 	</where> 
+	</select>
+	<!-- 할 일 수정 -->
+	<update id="taskUpdate" parameterType="com.jy.todolist.task.model.vo.Task">
+		UPDATE `tasks`
+		SET task_title = #{task_title},start_date = #{start_date},end_date=#{end_date},category_no= #{category_no}
+		<where>
+		task_no = #{task_no}
+		</where>
+	</update>
 </mapper>

@@ -35,4 +35,13 @@ public class TaskViewController {
     	model.addAttribute("categoryList",categoryList);
     	return "task/add";
     }
+    
+    @GetMapping("/taskUpdatePage/{task_no}")
+    public String taskUpdatePage(@PathVariable("task_no") int task_no, Model model) {
+    	Task task = taskService.selectTaskDetail(task_no);
+    	List<Category> categoryList = categoryService.selectCategoryList(task.getUser_no());
+    	model.addAttribute("categoryList",categoryList);
+    	model.addAttribute("task", task);
+    	return "task/update";
+    }
 }

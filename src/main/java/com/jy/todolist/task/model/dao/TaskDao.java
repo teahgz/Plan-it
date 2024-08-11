@@ -34,5 +34,12 @@ public class TaskDao {
 			return sqlSession.delete("taskMapper.deleteTask",task_no);
 		}
 		
+		public Task selectTaskDetail(int task_no) {
+			return sqlSession.selectOne("taskMapper.selectTaskDetail",task_no);
+		}
+		
+		public int taskUpdate(Task vo) {
+			return sqlSession.update("taskMapper.taskUpdate",vo);
+		}
 
 }

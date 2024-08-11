@@ -56,4 +56,21 @@ public class TaskApiController {
 	    return resultMap;
 	}
     
+	@ResponseBody
+	@PostMapping("/task/update/{task_no}")
+	public Map<String,String> updateTask( @RequestBody Task vo, @PathVariable("task_no") int task_no){
+		int result = 0 ;
+		vo.setTask_no(task_no);
+		result = taskService.taskUpdate(vo);
+		
+		Map<String,String> resultMap = new HashMap<String,String>();
+		resultMap.put("res_code", "404");
+		resultMap.put("res_msg", "할일 등록 중 오류가 발생하였습니다.");
+		
+		if( result > 0) {
+			resultMap.put("res_code", "200");
+			resultMap.put("res_msg", "할 일이 성공적으로 등록되었습니다.");
+		}
+		return resultMap;
+	}
 }
