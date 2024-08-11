@@ -25,8 +25,8 @@ public class TaskApiController {
 	public Map<String,String> taskAdd(@RequestBody Task vo, @PathVariable("user_no") int user_no){
 		
 		int result = 0 ;
-		result = taskService.taskAdd(vo);
 		vo.setUser_no(user_no);
+		result = taskService.taskAdd(vo);
 		
 		Map<String,String> resultMap = new HashMap<String,String>();
 		resultMap.put("res_code", "404");

@@ -31,7 +31,6 @@
 						<th>할 일</th>
 						<th>시작일</th>
 						<th>마감일</th>
-						<th>상태</th>
 						<th>관리</th>
 					</tr>
 				</thead>
@@ -45,20 +44,12 @@
 						<c:otherwise>
 							<c:forEach items="${resultList}" var="t">
 								<tr>
-									<td><input type="checkbox" /></td>
+									<td><input type="checkbox" onchange="toggleStrikethrough(this)" /></td>
 									<td><c:out value="${t.category_name}" /></td>
 									<td><c:out value="${t.task_title}" /></td>
 									<td><fmt:formatDate pattern="yy-MM-dd" value="${t.start_date}" /></td>
 									<td><fmt:formatDate pattern="yy-MM-dd" value="${t.end_date}" /></td>
-									<td>
-									<c:choose>
-										<c:when test="${t.status == 1}"> 대기 </c:when>
-											<c:when test="${t.status == 2}"> 진행중 </c:when>
-											<c:when test="${t.status == 3}"> 완료 </c:when>
-										</c:choose>
-									</td>
-									<td>
-										<a href="/taskUpdatePage/${t.task_no }">수정</a>
+									<td><a href="/taskUpdatePage/${t.task_no }">수정</a>
 										<button value="${t.task_no }" onclick="deleteTask(this)">삭제</button>
 									</td>
 								</tr>
@@ -71,27 +62,43 @@
 		</div>
 	</div>
 
-	<script>
-
+<script>
 function deleteTask(button) {
-	 const taskNo = button.value;
-	  if (confirm("정말 삭제하시겠습니까?")) {
-          fetch('<%=request.getContextPath()%>/task/' + taskNo, {
-              method: 'DELETE',
-              headers: {
-                  'Content-Type': 'application/json',
-                  'X-CSRF-TOKEN': '${_csrf.token}'
-              }
-          })
-          .then(response => response.json())
-          .then(data => {
-              alert(data.res_msg);
-              if (data.res_code == '200') {
-            	  location.href = `<%=request.getContextPath()%>/task/<sec:authentication property='principal.member.user_no'/>`;
-              }
-          })
-      }
-  }
+    const taskNo = button.value;
+    if (confirm("정말 삭제하시겠습니까?")) {
+        fetch('<%=request.getContextPath()%>/task/' + taskNo, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json', 
+                'X-CSRF-TOKEN': '${_csrf.token}'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.res_msg);
+            if (data.res_code == '200') {
+                location.href = `<%=request.getContextPath()%>/task/<sec:authentication property='principal.member.user_no'/>`;
+            }
+        })
+    }
+}
+
+function toggleStrikethrough(checkbox) {
+    const row = checkbox.closest('tr');
+    const cells = row.getElementsByTagName('td');
+    for (let i = 1; i < cells.length - 1; i++) {  
+        cells[i].style.textDecoration = checkbox.checked ? 'line-through' : 'none';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            toggleStrikethrough(this);
+        });
+    });
+});
 </script>
 </body>
 </html>
