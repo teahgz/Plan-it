@@ -27,8 +27,6 @@ public class TaskApiController {
 		int result = 0 ;
 		vo.setUser_no(user_no);
 		result = taskService.taskAdd(vo);
-		System.out.println("확인");
-		System.out.println(vo);
 		Map<String,String> resultMap = new HashMap<String,String>();
 		resultMap.put("res_code", "404");
 		resultMap.put("res_msg", "할일 등록 중 오류가 발생하였습니다.");
@@ -74,4 +72,41 @@ public class TaskApiController {
 		}
 		return resultMap;
 	}
+	
+	@ResponseBody
+	@PostMapping("/task/status/{task_no}")
+	public Map<String, String> updateStatusTask(
+	        @PathVariable("task_no") int task_no,
+	        @RequestBody Task task) {
+
+	    // 결과를 담을 Map 객체 생성
+	    Map<String, String> resultMap = new HashMap<>();
+	    resultMap.put("res_code", "404");
+	    resultMap.put("res_msg", "상태 업데이트 중 오류가 발생하였습니다.");
+
+	    try {
+	        // 요청 본문으로 받은 Task 객체의 상태 값 추출
+	        int newStatus = task.getStatus();
+
+	        // Task 객체의 task_no 값 설정
+	        task.setTask_no(task_no);
+
+	        // 서비스 레이어를 통해 Task 상태 업데이트 수행
+	        int result = taskService.taskStatusUpdate(task);
+
+	        // 업데이트가 성공적으로 이루어졌는지 확인
+	        if (result > 0) {
+	            resultMap.put("res_code", "200");
+	            resultMap.put("res_msg", "할 일의 상태가 성공적으로 업데이트되었습니다.");
+	        }
+	    } catch (Exception e) {
+	        resultMap.put("res_code", "500");
+	        resultMap.put("res_msg", "서버 오류가 발생했습니다.");
+	    }
+
+	    // 결과를 JSON 형식으로 반환
+	    return resultMap;
+	}
+
+	
 }

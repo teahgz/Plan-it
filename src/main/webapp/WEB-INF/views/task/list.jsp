@@ -43,7 +43,11 @@
                         <c:otherwise>
                             <c:forEach items="${resultList}" var="t">
                                 <tr>
-                                    <td><input type="checkbox" onchange="toggleStrikethrough(this)" /></td>
+                                    <!-- 체크박스 추가: onchange 이벤트로 상태 업데이트 -->
+                                    <td>
+                                        <input type="checkbox" onchange="updateTaskStatus(${t.task_no}, this.checked ? 3 : ${t.status})"
+                                            <c:if test="${t.status == 3}">checked</c:if> />
+                                    </td>
                                     <td><c:out value="${t.category_name}" /></td>
                                     <td><c:out value="${t.task_title}" /></td>
                                     <td>
@@ -69,13 +73,31 @@
     </div>
 
 <script>
+function updateTaskStatus(taskNo, newStatus) {
+    fetch('<%=request.getContextPath()%>/task/status/' + taskNo, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '${_csrf.token}'
+        },
+        body: JSON.stringify({ status: newStatus }) 
+    })
+    .then(response => response.json())
+    .then(data => {
+    	  alert(data.res_msg);
+        if (data.res_code == '200') {
+        	location.href = `<%=request.getContextPath()%>/task/<sec:authentication property='principal.member.user_no'/>`;
+        }
+    })
+}
+
 function deleteTask(button) {
     const taskNo = button.value;
     if (confirm("정말 삭제하시겠습니까?")) {
         fetch('<%=request.getContextPath()%>/task/' + taskNo, {
             method: 'DELETE',
             headers: {
-                'Content-Type': 'application/json', 
+                'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': '${_csrf.token}'
             }
         })
@@ -92,7 +114,7 @@ function deleteTask(button) {
 function toggleStrikethrough(checkbox) {
     const row = checkbox.closest('tr');
     const cells = row.getElementsByTagName('td');
-    for (let i = 1; i < cells.length - 1; i++) {  
+    for (let i = 1; i < cells.length - 1; i++) {
         cells[i].style.textDecoration = checkbox.checked ? 'line-through' : 'none';
     }
 }

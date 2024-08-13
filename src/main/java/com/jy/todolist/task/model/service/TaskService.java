@@ -86,5 +86,15 @@ public class TaskService {
 		}
 		return result;
 	}
+	
+	public int taskStatusUpdate(Task vo) {
+		int result = 0; 
+		try {
+			result = taskDao.taskStatusUpdate(vo);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 }

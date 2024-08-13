@@ -45,5 +45,9 @@ public class TaskDao {
 		public void updateTasksStatusForTomorrow() {
 	        sqlSession.update("taskMapper.updateTasksStatusForTomorrow");
 	    }
+		
+		public int taskStatusUpdate(Task vo) {
+			return sqlSession.update("taskMapper.taskStatusUpdate",vo);
+		}
 
 }

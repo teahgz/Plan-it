@@ -72,9 +72,15 @@
 	
 	<update id="updateTasksStatusForTomorrow">
       UPDATE `tasks`
-    SET status = 2
-    WHERE DATE(STR_TO_DATE(start_date, '%Y-%m-%dT%H:%i:%s')) = CURRENT_DATE
-    AND TIME(STR_TO_DATE(start_date, '%Y-%m-%dT%H:%i:%s')) = TIME(NOW())
-    AND status = 1
-</update>
+	    SET status = 2
+	    WHERE DATE(STR_TO_DATE(start_date, '%Y-%m-%dT%H:%i:%s')) = CURRENT_DATE
+	    AND TIME(STR_TO_DATE(start_date, '%Y-%m-%dT%H:%i:%s')) = TIME(NOW())
+	    AND status = 1
+	</update>
+
+ 	<update id="taskStatusUpdate" parameterType="com.jy.todolist.task.model.vo.Task">
+        UPDATE tasks
+        SET status = #{status}
+        WHERE task_no = #{task_no}
+    </update>
 </mapper>
