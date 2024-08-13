@@ -27,7 +27,8 @@ public class TaskApiController {
 		int result = 0 ;
 		vo.setUser_no(user_no);
 		result = taskService.taskAdd(vo);
-		
+		System.out.println("확인");
+		System.out.println(vo);
 		Map<String,String> resultMap = new HashMap<String,String>();
 		resultMap.put("res_code", "404");
 		resultMap.put("res_msg", "할일 등록 중 오류가 발생하였습니다.");

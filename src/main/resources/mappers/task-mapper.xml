@@ -69,4 +69,12 @@
 		task_no = #{task_no}
 		</where>
 	</update>
+	
+	<update id="updateTasksStatusForTomorrow">
+      UPDATE `tasks`
+    SET status = 2
+    WHERE DATE(STR_TO_DATE(start_date, '%Y-%m-%dT%H:%i:%s')) = CURRENT_DATE
+    AND TIME(STR_TO_DATE(start_date, '%Y-%m-%dT%H:%i:%s')) = TIME(NOW())
+    AND status = 1
+</update>
 </mapper>

@@ -25,13 +25,13 @@
 			<div class="form_group">
 				<label for="start_date">시작일</label>
 				<fmt:formatDate value="${task.start_date}" pattern="yyyy-MM-dd" var="formattedStartDate" />
-				<input type="date" id="start_date" name="start_date" value="${formattedStartDate}" required>
+				<input type="datetime-local" id="start_date" name="start_date" value="${formattedStartDate}" required>
 			</div>
 
 			<div class="form_group">
 				<label for="end_date">마감일</label>
 				<fmt:formatDate value="${task.end_date}" pattern="yyyy-MM-dd" var="formattedEndDate" />
-				<input type="date" id="end_date" name="end_date" value="${formattedEndDate}" required>
+				<input type="datetime-local" id="end_date" name="end_date" value="${formattedEndDate}" required>
 			</div>
 
 			<div class="form_group">

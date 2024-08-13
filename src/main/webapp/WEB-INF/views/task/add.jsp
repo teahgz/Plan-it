@@ -22,12 +22,12 @@
 
             <div class="form_group">
                 <label for="start_date">시작일</label>
-                <input type="date" id="start_date" name="start_date" required>
+                <input type="datetime-local" id="start_date" name="start_date" required>
             </div>
 
             <div class="form_group">
                 <label for="end_date">마감일</label>
-                <input type="date" id="end_date" name="end_date" required>
+                <input type="datetime-local" id="end_date" name="end_date" required>
             </div>
 
 			<div class="form_group">
@@ -83,6 +83,7 @@
     			.then(data => {
     				alert(data.res_msg);
                     if (data.res_code == '200') {
+					alert(form.start_date.value);
                     	location.href = `<%=request.getContextPath()%>/task/<sec:authentication property='principal.member.user_no'/>`;
                     }
     			});
