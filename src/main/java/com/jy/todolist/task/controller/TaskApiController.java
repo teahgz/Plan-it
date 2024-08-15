@@ -20,6 +20,7 @@ public class TaskApiController {
 	@Autowired
     TaskService taskService;
 	
+	// 할 일 등록
 	@ResponseBody
 	@PostMapping("/task/add/{user_no}")
 	public Map<String,String> taskAdd(@RequestBody Task vo, @PathVariable("user_no") int user_no){
@@ -38,6 +39,7 @@ public class TaskApiController {
 		return resultMap;
 	}
 	
+	// 할 일 삭제
 	@ResponseBody
 	@DeleteMapping("/task/{taskNo}")
 	public Map<String,String> deleteTask(@PathVariable("taskNo") int task_no){
@@ -55,6 +57,7 @@ public class TaskApiController {
 	    return resultMap;
 	}
     
+	// 할 일 수정
 	@ResponseBody
 	@PostMapping("/task/update/{task_no}")
 	public Map<String,String> updateTask( @RequestBody Task vo, @PathVariable("task_no") int task_no){
@@ -73,6 +76,7 @@ public class TaskApiController {
 		return resultMap;
 	}
 	
+	// 할 일 상태 업데이트
 	@ResponseBody
 	@PostMapping("/task/status/{task_no}")
 	public Map<String, String> updateStatusTask(
