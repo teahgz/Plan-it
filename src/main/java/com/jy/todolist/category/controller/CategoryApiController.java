@@ -20,6 +20,7 @@ public class CategoryApiController {
 	@Autowired
 	CategoryService categoryService;
 	
+	// 카테고리 등록
 	@ResponseBody
 	@PostMapping("/category/create")
 	public Map<String, String> addCategory(@RequestBody Category co) {
@@ -39,6 +40,7 @@ public class CategoryApiController {
 	    return resultMap;
 	}
 	
+	// 카테고리 업데이트
 	@ResponseBody
 	@PostMapping("/category/update")
 	public  Map<String, String> updateCategory(@RequestBody Category co) {
@@ -57,6 +59,7 @@ public class CategoryApiController {
 	    return resultMap;
 	}
 	
+	// 카테고리 삭제
 	@ResponseBody
 	@DeleteMapping("/category/{categoryNo}")
 	public Map<String,String> deleteCategory(@PathVariable("categoryNo") int category_no){
