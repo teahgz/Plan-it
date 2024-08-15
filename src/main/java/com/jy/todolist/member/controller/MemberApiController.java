@@ -18,6 +18,7 @@ public class MemberApiController {
 	@Autowired
 	MemberService memberService;
 	
+	// 회원가입
 	@ResponseBody
 	@PostMapping("/join")
 	public Map<String,String> createMember(@RequestBody Member vo){

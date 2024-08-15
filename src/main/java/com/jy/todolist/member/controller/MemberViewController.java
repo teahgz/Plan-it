@@ -31,6 +31,8 @@ public class MemberViewController {
 		return "member/login";
 	}
 	
+	
+	// 마이페이지 
 	@GetMapping("/myPage/{user_no}")
 	public String myPage(@PathVariable("user_no") int user_no,Model model) {
 		int taskCount = taskService.selectTaskCount(user_no);
