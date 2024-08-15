@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>마이페이지</title>
+    <title>Plan !t</title>
     <link href="<c:url value='/resources/css/member/mypage.css'/>" rel="stylesheet" type="text/css">
 </head>
 <body>

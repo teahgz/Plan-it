@@ -5,7 +5,7 @@
 <html> 
 <head>
 <meta charset="UTF-8">
-<title>로그인</title>
+<title>Plan !t</title>
 <link href="<c:url value='/resources/css/member/login.css' />" rel="stylesheet" type="text/css">
 </head>
 <body>
