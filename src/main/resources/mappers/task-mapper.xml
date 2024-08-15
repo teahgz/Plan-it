@@ -42,10 +42,17 @@
 	</select>
 	<!-- 할일 추가 -->
 	<insert id="taskAdd" parameterType="com.jy.todolist.task.model.vo.Task">
-		INSERT INTO `tasks` (user_no, category_no, task_title, start_date, end_date)
-		VALUES
-		(#{user_no},#{category_no},#{task_title},#{start_date},#{end_date})
+	    INSERT INTO `tasks` ( user_no, category_no, task_title, start_date, end_date, status )
+	    VALUES (
+	        #{user_no}, #{category_no}, #{task_title}, #{start_date}, #{end_date},
+	        CASE
+	            WHEN STR_TO_DATE(#{start_date}, '%Y-%m-%dT%H:%i') &lt;= NOW() THEN 2
+	            ELSE 1  <!-- 기본 상태 -->
+	        END
+	    )
 	</insert>
+
+
 	<!-- 할 일 삭제 -->
 	<delete id ="deleteTask" parameterType="_int">
 		DELETE FROM `tasks`
@@ -69,7 +76,7 @@
 		task_no = #{task_no}
 		</where>
 	</update>
-	
+	<!--  스케줄러 작동 시 업데이트 -->	
 	<update id="updateTasksStatusForTomorrow">
       UPDATE `tasks`
 	    SET status = 2
@@ -77,7 +84,7 @@
 	    AND TIME(STR_TO_DATE(start_date, '%Y-%m-%dT%H:%i:%s')) = TIME(NOW())
 	    AND status = 1
 	</update>
-
+	<!-- 체크 박스 선택 시 상태 업데이트 -->
  	<update id="taskStatusUpdate" parameterType="com.jy.todolist.task.model.vo.Task">
         UPDATE tasks
         SET status = #{status}

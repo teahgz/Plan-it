@@ -43,10 +43,9 @@
                         <c:otherwise>
                             <c:forEach items="${resultList}" var="t">
                                 <tr>
-                                    <!-- 체크박스 추가: onchange 이벤트로 상태 업데이트 -->
                                     <td>
-                                        <input type="checkbox" onchange="updateTaskStatus(${t.task_no}, this.checked ? 3 : ${t.status})"
-                                            <c:if test="${t.status == 3}">checked</c:if> />
+                         				<input type="checkbox" onchange="updateTaskStatus(${t.task_no}, this.checked ? 3 : 2)"
+   										<c:if test="${t.status == 3}">checked</c:if> />
                                     </td>
                                     <td><c:out value="${t.category_name}" /></td>
                                     <td><c:out value="${t.task_title}" /></td>
@@ -73,6 +72,7 @@
     </div>
 
 <script>
+// 할 일 수정
 function updateTaskStatus(taskNo, newStatus) {
     fetch('<%=request.getContextPath()%>/task/status/' + taskNo, {
         method: 'POST',
@@ -84,13 +84,24 @@ function updateTaskStatus(taskNo, newStatus) {
     })
     .then(response => response.json())
     .then(data => {
-    	  alert(data.res_msg);
         if (data.res_code == '200') {
-        	location.href = `<%=request.getContextPath()%>/task/<sec:authentication property='principal.member.user_no'/>`;
+            alert(data.res_msg);
+            const checkbox = document.querySelector(`input[type="checkbox"][onchange*="updateTaskStatus(${taskNo},"]`);
+            if (checkbox) {
+                checkbox.checked = newStatus === 3;
+            }
+        } else {
+            alert('상태 업데이트에 실패했습니다: ' + data.res_msg);
+            const checkbox = document.querySelector(`input[type="checkbox"][onchange*="updateTaskStatus(${taskNo},"]`);
+            if (checkbox) {
+                checkbox.checked = !checkbox.checked;
+            }
         }
     })
+
 }
 
+// 할 일 삭제 
 function deleteTask(button) {
     const taskNo = button.value;
     if (confirm("정말 삭제하시겠습니까?")) {
@@ -110,23 +121,6 @@ function deleteTask(button) {
         })
     }
 }
-
-function toggleStrikethrough(checkbox) {
-    const row = checkbox.closest('tr');
-    const cells = row.getElementsByTagName('td');
-    for (let i = 1; i < cells.length - 1; i++) {
-        cells[i].style.textDecoration = checkbox.checked ? 'line-through' : 'none';
-    }
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', function() {
-            toggleStrikethrough(this);
-        });
-    });
-});
 </script>
 </body>
 </html>
