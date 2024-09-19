@@ -1,5 +1,6 @@
 package com.jy.todolist.task.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,10 +39,14 @@ public class TaskViewController {
     
     @GetMapping("/taskUpdatePage/{task_no}")
     public String taskUpdatePage(@PathVariable("task_no") int task_no, Model model) {
-    	Task task = taskService.selectTaskDetail(task_no);
-    	List<Category> categoryList = categoryService.selectCategoryList(task.getUser_no());
-    	model.addAttribute("categoryList",categoryList);
-    	model.addAttribute("task", task);
-    	return "task/update";
+        Task task = taskService.selectTaskDetail(task_no);
+        List<Category> categoryList = categoryService.selectCategoryList(task.getUser_no());
+
+
+        model.addAttribute("categoryList", categoryList);
+        model.addAttribute("task", task);
+
+        return "task/update";
     }
+
 }

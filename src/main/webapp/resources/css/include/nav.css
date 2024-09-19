@@ -1,7 +1,8 @@
 @charset "UTF-8";
 
 nav {
-    padding-right: 100px;
+    padding-left: 320px;
+    padding-right: 320px;
     padding-bottom:50px;
 }
 
@@ -13,6 +14,7 @@ nav ul {
 }
 
 nav ul li {
+	background: white;
     display: inline; 
     margin-left: 15px; 
 }

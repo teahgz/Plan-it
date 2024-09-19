@@ -50,11 +50,12 @@ section {
 	display: flex;
 	justify-content: center;
 	align-items: flex-start; 
+	margin-bottom: 40px;
 }
 
 #section_wrap .login_form input[type='button'] {
 	width: 90px;
-	height:50px;
+	height: 80px;
     font-size: 16px;
     border: 1px solid #333; 
     border-radius: 4px; 

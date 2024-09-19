@@ -22,6 +22,10 @@
                     <div class="form-group">
                         <input type="text" name="user_id" placeholder="아이디"> 
                         <input type="password" name="user_pw" placeholder="비밀번호"> 
+                    <div>
+                    	<input type="checkbox" name="remember-me" id="remember-me">
+                    	<label for="rembmember-me">로그인 유지</label>
+                    </div>
                     </div>
                     <div class="button-group">
                         <input type="button" value="로그인" onclick="loginForm();">

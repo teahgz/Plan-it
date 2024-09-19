@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>Plan !t</title>
 <link href="<c:url value='/resources/css/task/list.css' />" rel="stylesheet" type="text/css">
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <jsp:include page="../include/header.jsp" />
@@ -37,15 +38,15 @@
                     <c:choose>
                         <c:when test="${empty resultList}">
                             <tr>
-                                <td colspan="7">할 일이 없습니다.</td>
+                                <td colspan="6">할 일이 없습니다.</td>
                             </tr>
                         </c:when>
                         <c:otherwise>
                             <c:forEach items="${resultList}" var="t">
                                 <tr>
                                     <td>
-                         				<input type="checkbox" onchange="updateTaskStatus(${t.task_no}, this.checked ? 3 : 2)"
-   										<c:if test="${t.status == 3}">checked</c:if> />
+                                        <input type="checkbox" onchange="updateTaskStatus(${t.task_no}, this.checked ? 3 : 2)"
+                                        <c:if test="${t.status == 3}">checked</c:if> />
                                     </td>
                                     <td><c:out value="${t.category_name}" /></td>
                                     <td><c:out value="${t.task_title}" /></td>
@@ -59,7 +60,7 @@
                                     </td>
                                     <td>
                                         <a href="/taskUpdatePage/${t.task_no }">수정</a>
-                                        <button value="${t.task_no }" onclick="deleteTask(this)">삭제</button>
+                                        <button data-task-no="${t.task_no }" onclick="deleteTask(this)">삭제</button>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -72,7 +73,6 @@
     </div>
 
 <script>
-// 할 일 수정
 function updateTaskStatus(taskNo, newStatus) {
     fetch('<%=request.getContextPath()%>/task/status/' + taskNo, {
         method: 'POST',
@@ -80,11 +80,11 @@ function updateTaskStatus(taskNo, newStatus) {
             'Content-Type': 'application/json',
             'X-CSRF-TOKEN': '${_csrf.token}'
         },
-        body: JSON.stringify({ status: newStatus }) 
+        body: JSON.stringify({ status: newStatus })
     })
     .then(response => response.json())
     .then(data => {
-        if (data.res_code == '200') {
+        if (data.res_code === '200') {
             alert(data.res_msg);
             const checkbox = document.querySelector(`input[type="checkbox"][onchange*="updateTaskStatus(${taskNo},"]`);
             if (checkbox) {
@@ -97,29 +97,51 @@ function updateTaskStatus(taskNo, newStatus) {
                 checkbox.checked = !checkbox.checked;
             }
         }
-    })
-
+    });
 }
 
-// 할 일 삭제 
 function deleteTask(button) {
-    const taskNo = button.value;
-    if (confirm("정말 삭제하시겠습니까?")) {
-        fetch('<%=request.getContextPath()%>/task/' + taskNo, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '${_csrf.token}'
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            alert(data.res_msg);
-            if (data.res_code == '200') {
-                location.href = `<%=request.getContextPath()%>/task/<sec:authentication property='principal.member.user_no'/>`;
-            }
-        })
-    }
+    const taskNo = button.getAttribute('data-task-no');
+    
+    Swal.fire({
+        text: '삭제하시겠습니까?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#EEB3B3',
+        cancelButtonColor: '#C0C0C0',
+        confirmButtonText: '삭제',
+        cancelButtonText: '취소'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch('<%=request.getContextPath()%>/task/' + taskNo, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '${_csrf.token}'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.res_code == '200') {
+                    Swal.fire({
+                        icon: 'success',
+                        text: data.res_msg,
+                        confirmButtonColor: '#B1C2DD',
+                        confirmButtonText: "확인"
+                    }).then(() => {
+                        location.href = `<%=request.getContextPath()%>/task/<sec:authentication property='principal.member.user_no'/>`;
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        text: data.res_msg,
+                        confirmButtonColor: '#B1C2DD',
+                        confirmButtonText: "확인"
+                    });
+                }
+            });
+        }
+    });
 }
 </script>
 </body>
